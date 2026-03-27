@@ -37,7 +37,7 @@ gh repo clone bkoconnell/datascience-capstone my-folder-name
 
 ## Option 2: Git (Command Line)
 
-If you have Git installed but not the GitHub CLI, use the standard `git clone` command.
+If you have Git installed but not the GitHub CLI, use the standard `git clone` command in a local terminal. This will clone the repo into a new folder in your current directory.
 
 ```bash
 git clone https://github.com/bkoconnell/datascience-capstone.git

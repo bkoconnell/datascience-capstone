@@ -1,13 +1,10 @@
-
-
 # Machine Learning for Gunshot Residue (GSR) Classification<br><br>*Accuracy, Interpretability, and Failure Analysis*
 ____________________________________________________________
 > Join the conversation! Checkout our [Discussion Board](https://github.com/bkoconnell/datascience-capstone/discussions) where we brainstorm and collaborate on the project.
 ____________________________________________________________
 
-Read our [docs/](https://github.com/bkoconnell/datascience-capstone/tree/main/docs) for __*developer setup*__ (reproducibility), __*contributing*__ guidelines, and general support documentation.
-
 ## Table of Contents
+- [Quick Start](#quick-start)
 - [Team Delta](#team-delta)
 - [Project Background](#project-background)
 - [Research Questions](#research-questions)
@@ -16,13 +13,25 @@ Read our [docs/](https://github.com/bkoconnell/datascience-capstone/tree/main/do
 - [Data](#data)
 - [Methods](#methods)
 - [Technical Stack](#technical-stack)
-- [Model Testing & Reproducibility](#model-testing--reproducibility)
+- [Testing & Source Code](#testing--source-code)
+- [Artifacts](#artifacts)
 - [Repository Structure](#repository-structure)
 - [Project Timeline](#project-timeline)
 
+## Quick Start
+
+Impatient developer? Can't wait to try our models? The [QuickStart](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/QuickStart.md) guide was made just for you.
+
+Contributors are welcome! Please follow our [CONTRIBUTING](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/CONTRIBUTING.md) guidelines to learn how we’ve **checked each box** ✅ for ***coding best practices*** 😉
+
+> **Note on Reproducibility:**
+ For anyone cloning our repository locally, it is highly recommended to complete (at minimum) steps 1 and 2 from the [QuickStart](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/QuickStart.md) guide as a path of least resistence. It ensures your local environment matches the project's while keeping the Python dependencies separate from your global Python packages.
+
+ [Read the Docs](https://github.com/bkoconnell/datascience-capstone/tree/main/docs) for all our in-depth repository support documentation.
+
 ## Team Delta
 
-*Official team member accounts are listed in [CODEOWNERS](https://github.com/bkoconnell/datascience-capstone/blob/main/CODEOWNERS)*
+Who are we? The Team Delta [CODEOWNERS](https://github.com/bkoconnell/datascience-capstone/blob/main/CODEOWNERS) for this DataScience Capstone project. Feel free to create an Issue, use our Discussion Board, or contact us via GitHub accounts in the codeowners file.
 
 ### Project Attributions
 
@@ -36,16 +45,16 @@ __Models__
 - XGBoost: **Brendan OConnell**
 - Neural Net: **Kristin Predeck**
 
-> NOTE: Individual file attributions can be found in the file headers with Author details.
+> Individual file attributions can be found in the header of source code files with Author details, or in the [NOTEBOOKS.md](https://github.com/bkoconnell/datascience-capstone/blob/main/notebooks/NOTEBOOKS.md) file which lists each author per notebook.
 
-### Peer Reviews
+### Code Reviews
 
-We rely on the following resources for our peer reviews:
+We rely on the following resources for our peer code reviews:
 
-- Pull Request comments (for non-notebook files, general feedback, and PR approvals)
-- Our [ReviewNB](https://app.reviewnb.com/bkoconnell/datascience-capstone/) page (3rd party resource specifically for Jupyter Notebook reviews)
+- Pull Request comments (PR approvals, general feedback, comments on non-notebook files)
+- Our [GitNotebooks](https://app.gitnotebooks.com/bkoconnell/datascience-capstone/pulls) page (3rd party resource specifically for Jupyter Notebook reviews)
 
-__*ReviewNB*__ addresses the shortcomings of GitHub's UI, which displays `.ipynb` files as raw JSON and is not conducive to interpretable reviews.
+__*GitNotebooks*__ addresses the shortcomings of GitHub's UI, which displays `.ipynb` files as raw JSON and is not conducive to interpretable reviews. Here is an example of a PR review our team recently did : [PR-54 Code Review](https://app.gitnotebooks.com/bkoconnell/datascience-capstone/pull/54)
 
 ## Project Background
 
@@ -78,24 +87,26 @@ Machine learning offers a data-driven alternative that can improve the consisten
 
 ## Stakeholders
  
-This research is relevant to a range of stakeholders across the forensic science and criminal justice landscape:
+Our primary stakeholder is the __National Institute of Justice (NIJ)__, but this research impacts a range of other stakeholders across the forensic science and criminal justice landscape. Here are some research beneficiaries:
  
 - **Crime laboratories and law enforcement agencies** (e.g., FBI Laboratory, ATF, state police crime labs) who would benefit from faster, more consistent GSR classification tools that reduce analyst workload and inter-examiner variability.
 - **Standards and metrology bodies** (e.g., NIST, ENFSI) with an interest in developing validated, reproducible benchmarks for forensic particle analysis.
 - **Legal and public defense organizations** (e.g., the Innocence Project, public defender offices) who have a stake in understanding false positive rates and model limitations, given the role forensic evidence plays in wrongful convictions.
-- **Federal research funders** (e.g., the National Institute of Justice, NSF) who actively support research aimed at improving the scientific rigor of forensic methods.
+- **Federal research funders** (e.g. NSF) who actively support research aimed at improving the scientific rigor of forensic methods.
  
 ## Data
  
-This project uses two complementary datasets:
+This project uses two complementary datasets. View the compressed [raw data parquet files](https://github.com/bkoconnell/datascience-capstone/tree/main/data/raw).
  
 ### NFI Gunshot Residue Dataset (Matzen et al., 2022)
+[NFI readme](https://github.com/bkoconnell/datascience-capstone/blob/main/data/raw/NFI/NFI.md)
 - **Source:** Netherlands Forensic Institute ([GitHub](https://github.com/NetherlandsForensicInstitute/gunshot-residue))
 - **Contents:** SEM/EDS particle measurements with expert-assigned relevance classes across four relational tables (stub, particle, source, stub_source)
 - **Size:** 2,801,667 particles across 90 elemental composition columns from 210 criminal cases and 63 R&D projects
 - **Role in this project:** Primary dataset for ML training and evaluation. Particles are labeled as GSR (1,078,946), Non-GSR (1,216,039), or Ambiguous (506,682) based on their merged relevance class, validated against NIST ground truth.
 
 ### NIST Gunshot Residue Dataset (Ritchie & Reynolds, 2021)
+[NIST readme](https://github.com/bkoconnell/datascience-capstone/blob/main/data/raw/NIST/NIST.md)
 - **Source:** National Institute of Standards and Technology ([DOI: 10.18434/mds2-2660](https://www.nist.gov/glossary-term/38706))
 - **Role in this project:** Used to validate NFI particle class labels by confirming which classes represent true GSR vs environmental confounders.
 - **Files used:**
@@ -165,77 +176,94 @@ All hyperparameter tuning will be oriented toward minimizing false positives whi
 - **Visualization:** matplotlib, seaborn
 - **Interpretability:** shap
 - **Version control:** Git / GitHub / Git LFS (large file storage for parquets)
-- **Formatting:** Ruff
+- **Formatting:** Ruff, nbQA
 
-## Model Testing & Reproducibility
+View the [requirements.txt](https://github.com/bkoconnell/datascience-capstone/blob/main/requirements.txt) for full list of Python dependencies. 
+
+## Testing & Source Code
 
 ### Model Testing
 
-The latest model releases are found here: `artifacts/models/`.
+The latest model releases are found here: [artifacts/models/](https://github.com/bkoconnell/datascience-capstone/tree/main/artifacts/models).
 
 Pre-designed tests for the latest model releases are available in `tests/model/`.
 
-> TODO: Write model tests. Then add steps here for running the Model Tests
+> **TODO: Write model tests. Then add steps here for running the Model Tests. Include the latest test results for each model.**
 
-### Test Automation (GitHub)
+### Test Automation (GitHub Actions CI)
 
-CI runs on every pull request to `main` (and on manual dispatch) via GitHub Actions in [.github/workflows/](.github/workflows/). The pipeline is composed of the following jobs:
+CI runs on every pull request to `main` (and on manual dispatch) via GitHub Actions in [.github/workflows/](https://github.com/bkoconnell/datascience-capstone/tree/main/.github/workflows/). The pipeline is composed of the following jobs:
 
-- **Python Lint** — Runs Ruff in format-check mode against the repo's Python sources. Fails the PR if any file is not ruff-format-clean and uploads the proposed diff as a build artifact.
-- **Notebook Lint** *(not released)* — Will enforce notebook hygiene (cleared outputs, consistent formatting, etc.) so that `.ipynb` reviews on ReviewNB stay focused on substantive changes.
-- **Unit Tests** — Runs the `pytest` suite under `tests/unit/` against a freshly installed environment (`pip install -r requirements.txt` + editable install of the project package).
+- **Python Lint** ... Runs `py_lint.py`, which uses the Ruff formatting tool against the repo's .PY files. Fails the CI job if any file is not format-compliant and uploads the proposed diff as a build artifact.
 
-Non-PR automation jobs:
-- **Reproducibility** *(not released)* — Users can manually trigger this workflow for an end-to-end data and modeling pipeline on a slim sample so that downstream notebooks remain runnable from a clean clone.
+- **Notebook Lint** ... Runs `nb_lint.py` (Ruff formatting tool via [nbQA](https://nbqa.readthedocs.io/)) against .IPYNB files. Fails the CI job if any file is not format-compliant and uploads the proposed diff as a build artifact.
 
-### Local Reproducibility
+- **Import-Position Lint** ... Checks every .PY and .IPYNB file for imports that appear after non-import code. Fails the CI job and uploads a Markdown report of the offending imports as a build artifact. See [docs/github_actions/linting.md](https://github.com/bkoconnell/datascience-capstone/tree/main/docs/github_actions/linting.md).
 
-> **Prerequisite:** Follow [docs/DEVELOPER_SETUP.md](docs/DEVELOPER_SETUP.md) to set up Python, the virtual environment, and Git LFS so the project's data and dependencies resolve correctly.
+- **Unit Tests** ... Runs the `pytest` suite under `tests/unit/` against a freshly installed environment (`pip install -r requirements.txt` + editable install of the project package).
 
-The [src/](src/) directory hosts reusable Python code (helpers, model utilities, scripts) that the notebooks import. Centralizing logic there keeps notebooks focused on narrative and exploration while letting non-trivial functions be shared, tested, and lint-checked alongside the rest of the codebase.
+Manually triggered CI jobs:
+- **Notebook Validation** *(Reproducibility)* [not released] ... Users can manually trigger this workflow using a PR Label to either run all notebooks in the project (in parallel) or run only the notebooks that are in the **changed files** for the PR.
+
+>**TODO: Link to latest Reproducibility report from the `validate` testing (GitHub CI) w/ Screenshot of all notebooks passing**
 
 ### Local Testing
 
-> **Prerequisite:** Follow [docs/DEVELOPER_SETUP.md](docs/DEVELOPER_SETUP.md) before running the steps below.
+**Lint (auto-format)** ... Apply ruff formatting to every `.py` and `.ipynb` file via the `lint.sh` / `lint.bat` wrapper, then commit the diff. See [docs/linting.md](docs/linting.md).
 
-**Lint** — From the repository root, run the wrapper that matches your shell. Both forward to `src/scripts/linting/py_lint.py` and apply Ruff formatting in place:
+**Lint (import position)** ... Check that every `import` sits at the top of its file. No auto-fix. Review the report and move any offending imports manually. See [docs/linting.md](docs/linting.md).
 
-```bash
-# macOS / Linux
-./lint.sh
+**Model tests** ... Not released yet ... Will run predefined tests from `tests/model/`. See [docs/testing.md](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/testing.md).
 
-# Windows
-lint.bat
-```
+**Unit tests** ... Run the pytest suite under `tests/unit/`. See [docs/testing.md](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/testing.md). (NOTE: You must complete steps 1 & 2 from the [QuickStart](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/QuickStart.md) guide for developer env setup *before* running the tests).
 
-Inspect the resulting diff and commit any changes the formatter applies; the CI `Python Lint` job will fail otherwise.
+**Validate Notebooks (*reproducibility*)** ... Not released yet ... but this script can be run locally to validate our notebooks.
 
-**Unit tests** — From the `tests/unit/` directory, run the full suite or a single file:
+>**TODO: Link to latest Unit Test report from the `unit test` job (GitHub CI) w/ Screenshot of all tests passing**
 
-```bash
-# Run all unit tests
-pytest
+### Source Code / Custom Functions
 
-# Run a specific test file
-pytest test_fileops.py
-```
+> **Prerequisite:** You must complete steps 1 & 2 from the [QuickStart](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/QuickStart.md) guide for developer env setup.
 
-See [tests/README.md](tests/README.md) for additional usage details.
+The `src` directory contains reusable code to support notebook exploration & project reproducibility.
+
+The `utils` directory replicates many of the custom functions originally used in our notebooks. The authors are credited, and docstrings are included with usage details.
+
+> NOTE: As of 5/8/2026, we haven't incorporated the `src` code into our notebooks, but the plumbing is there and fully functional. To import code from `src` into a notebook, review the usage examples in [docs/DEVELOPER_SETUP.md](https://github.com/bkoconnell/datascience-capstone/blob/main/docs/DEVELOPER_SETUP.md). After developer setup, you can also run the unit tests which confirm our custom functions work.
+
+See [src/SOURCE.md](https://github.com/bkoconnell/datascience-capstone/blob/main/src/SOURCE.md) for additional details.
+
+
+## Artifacts
+
+__Project Artifacts__
+
+Normally we would keep our artifacts in a separate artifact repository for storage efficiency, but given the nature of this capstone project we have decided to store them in the code repository.
+
+Our final models, stakeholder presentation, project reports, and data dictionaries can be found in the [artifacts/](https://github.com/bkoconnell/datascience-capstone/tree/main/artifacts) directory.
+
+> The plots for our presentation & final report are colorblind-friendly with alt text to assist those who are visually impaired.
+
+__CI Artifacts__
+
+Ephemeral output files from locally run continuous improvement scripts (e.g. notebook validation, import linting) are written to [.artifacts_ci/](https://github.com/bkoconnell/datascience-capstone/tree/main/.artifacts_ci). (gitignored)
 
 ## Repository Structure
  
 ```
 datascience-capstone/
+├── .artifacts_ci/                  # Ephemeral output files from local scripts (validation/linting)
 ├── .github/
 │   └── workflows/                  # CI workflows (py-lint, nb-lint, unit-tests)
+│
 ├── artifacts/
-│   ├── models/                     # Trained model artifacts (e.g., neural_network/)
-│   └── reports/                    # Submitted reports
-│       ├── 01_eda/
-│       ├── 02_feature_processing/
-│       └── 03_model_exploration/
+│   ├── models/                     # Final models
+│   ├── presentation/               # NIJ stakeholder presentation
+│   └── reports/                    # Submitted project reports
+│       └── data_dictionaries/      # Data dictionaries for our datasets
+│
 ├── data/
-│   ├── raw/                        # Original unmodified datasets
+│   ├── raw/                        # Original datasets (unmodified except compression & concat)
 │   │   ├── NFI/                    # primary dataset
 │   │   └── NIST/                   # secondary dataset
 │   │
@@ -249,36 +277,43 @@ datascience-capstone/
 │       ├── engineered_features_xgboost.parquet  # NFI Feature Engineered (xgb)
 │       ├── engineered_features_nn.parquet       # NFI Feature Engineered (nn)
 │       │
-│       ├── preprocessed_nist.parquet            # NIST for cross-testing
-│       └── nist_concatenated_parquets/          # NIST concatenated (not fully processed)
+│       ├── preprocessed_nist.parquet            # NIST for cross-testing/validation
+│       └── nist_concatenated_parquets/          # NIST concatenated (unprocessed)
 │ 
-├── docs/                           # Project documentation, reports, and references
+├── docs/                           # Repository support documentation / guides
+│   ├── github_actions/             # CI workflow docs
 │   ├── CLONING.md
-│   ├── CONTRIBUTING.md
-│   ├── DEVELOPER_SETUP.md
+│   ├── CONTRIBUTING.md             # Best Practices & guidelines for contributing
+│   ├── DEVELOPER_SETUP.md          # Recommended setup guide for reproducibility
+│   ├── linting.md                  # Steps to run local scripts for Python compliance
 │   ├── python_setup.md
-│   ├── data_dictionaries/          # Per-stage data dictionaries
-│   └── workflows/                  # Linting and testing workflow docs
+│   └── testing.md
 │ 
 ├── notebooks/                      # Jupyter Notebooks for the DataScience Flow
-│   │                                (w/ ephemeral `outputs/` dir per section)
+│   │
+│   ├── NOTEBOOKS.md                # Overview of our Notebooks                  
 │   ├── 00_tidy_data_prep/
 │   ├── 01_eda/
 │   ├── 02_feature_processing/
 │   ├── 03_model_exploration/
 │   ├── 04_model/
 │   ├── 05_evaluation/
-│   ├── 06_presentation/
+│   ├── 06_validation/
+│   ├── 99_presentation/
 │   └── 99_sandbox/
-├── src/                            # Reusable Python source supporting notebooks
-│   ├── eda.py
-│   ├── exceptions.py
-│   ├── scripts/                    # Standalone data-prep / lint scripts (incl. julia/)
-│   └── utils/                      # Shared helpers: common, fileops, logreg, nist, nn, xgb
+│ 
+├── src/                            # Reusable Python source code / custom functions
+│   ├── eda.py                      # reproduced EDA steps
+│   ├── exceptions.py               # Custom exceptions
+│   ├── scripts/                    # Data prep & linting scripts (includes `julia/` for NIST)
+│   └── utils/                      # Custom Functions: common, fileops, logreg, nist, nn, xgb
+│ 
 ├── tests/                          # Pytest suite
 │   ├── model/                      # Model tests (TODO — not yet implemented)
-│   └── unit/                       # Unit tests for src/ helpers + lint script
-├── lint.bat / lint.sh              # Local lint entrypoints (Ruff)
+│   └── unit/                       # Unit tests for source code
+│ 
+├── lint.bat / lint.sh              # Run Linting (local)
+├── validate.bat / validate.sh      # Run Notebook Validation (local)
 ├── pyproject.toml                  # Project + tooling configuration
 └── requirements.txt                # Python dependencies
 ```

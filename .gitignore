@@ -1,5 +1,8 @@
-# Raw data (too large for GitHub)
+# Raw data
 data/raw/
+
+# CI artifacts
+.artifacts_ci/
 
 # Jupyter / Python
 .ipynb_checkpoints/
@@ -30,6 +33,9 @@ pip-delete-this-directory.txt
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Local CI / lint artifacts (e.g. import_lint.py reports)
+.artifacts_ci/
 
 # Miscellaneous
 *.log

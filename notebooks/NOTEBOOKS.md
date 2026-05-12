@@ -44,7 +44,7 @@ __Key Decisions / Insights:__
 __Notebook Authors:__
 
 - `pipeline.ipynb` Brendan OConnell ~4s
-- `pipeline_minimal_xgb.ipynb` Brendan OConnell ~4s
+- `pipeline_minimal_xgb.ipynb` Brendan OConnell ~4s *UPDATED*
 
 __Goals:__
 
@@ -63,7 +63,7 @@ __Key Decisions__
 
 __Notebook Authors w/ estimated run time:__
 
-- `feature_exploration_xgboost.ipynb` Brendan OConnell ~25s
+- `feature_engineering_xgb_all_elements.ipynb` Brendan OConnell *UPDATED*
 - `feature_exploration_nn.ipynb` Kristin Predeck ~40s
 - `feature_exploration_log_regression.ipynb` Carlos Adamson ~80s
 
@@ -85,8 +85,8 @@ __Key Decisions / Insights__
 __Notebook Authors w/ estimated run time:__
 
 - `Logisitic_Regression.ipynb` Carlos Adamson ~1 min
-- `xgboost_baseline_v2.ipynb` Brendan OConnell ~4 min
 - `nn_baseline_v2.ipynb` Kristin Predeck ~27 min
+- `xgb_baseline_all_elements.ipynb` Brendan OConnell *UPDATED*
 
 __Goals:__
 
@@ -104,9 +104,9 @@ __Outputs:__
 
 __Notebook Authors w/ estimated run time:__
 
-- `xgb_optimize.ipynb` Brendan OConnell ~6 min
-- `nn_tuning.ipynb` Kristin Predeck *TBD* (>20min)
 - `HP_Logistic_Regression.ipynb` Carlos Adamson *TBD* (>20min)
+- `nn_tuning.ipynb` Kristin Predeck *TBD* (>20min)
+- `xgb_optimize.ipynb` Brendan OConnell ~6 min
 
 __Goals:__
 
@@ -135,9 +135,9 @@ __Goals:__
 
 __Notebook Authors w/ estimated run time:__
 
-- `xgb_nist_validation.ipynb` Brendan OConnell ~4 min
 - `logistic_regression_nist_validation.ipynb` Carlos Adamson *TBD* (long)
-- `NN_nist_validation.ipynb` Carlos Adamson *TBD* (long)
+- `NN_nist_validation.ipynb` Kristin Predeck *TBD* (long)
+- `xgb_nist_validation.ipynb` Brendan OConnell ~4 min
 
 __Goals:__
 
@@ -169,27 +169,17 @@ __Outputs:__
 
 ## Sandbox
 
-> These are kept for traceability/historical context and are not maintained against the latest data layouts.
-
-__Notebook Authors for original raw data inspection:__
-
-Single use data inspection notebooks to load raw files from a local storage location.
-
-*Will not run. Bad filepath for raw data.*
-
-- `create_main_data.ipynb` Kristin Predeck
-- `NFI_data_load_and_merge.ipynb` Kristin Predeck
-- `NIST_data_inspect.ipynb` Kristin Predeck
-- `EPA_environmental_confounder_analysis.ipynb` Carlos Adamson
-
 __Notebook Authors w/ estimated run time:__
 
-Post-inspection notebooks that are not maintained as part of our main DataScience flow.
+Earlier versions or one-off investigative notebooks that are not maintained as part of our main DataScience flow, but are kept for reference / historical context.
 
 - `eda/NFI_oxygen_analysis.ipynb` Brendan OConnell ~30s
 - `eda/particle_eda_viz_formatting.ipynb` Kristin Predeck ~2 min (a copy of her EDA notebook w/ added viz formatting for EDA report)
+- `eda/umap_appendix.ipynb` Brendan OConnell
+- `feature_processing/feature_exploration_xgboost.ipynb` Brendan OConnell ~25s
 - `model_baseline_exploration/nn_baseline.ipynb` Kristin Predeck ~13 min
 - `model_baseline_exploration/xgboost_baseline_v1.ipynb` Brendan OConnell ~1.5 min
+- `model_baseline_exploration/xgboost_baseline_v2.ipynb` Brendan OConnell ~4 min
 - `model_baseline_exploration/xgboost_baseline_v3.ipynb` Brendan OConnell ~3 min
 - `model_baseline_exploration/xgboost_baseline_v4_no_eng_feats.ipynb` Brendan OConnell ~4 min
 - `model_eval/xgb_eval.ipynb` Brendan OConnell ~6 min
@@ -200,3 +190,18 @@ __Goals:__
 - Exploratory and experimental notebooks that are not part of the main DS Flow
 - Alternative/failed/unchosen model iterations preserved for reference
 - One-off investigations
+
+# Archived
+
+> These are kept for traceability/historical context and are not maintained against the latest data layouts.
+
+__Notebook Authors for original raw data inspection:__
+
+Single use data inspection notebooks to load raw files from a local storage location.
+
+*Will not run. Bad filepath for raw data.*
+
+- `create_main_data.ipynb` Kristin Predeck
+- `EPA_environmental_confounder_analysis.ipynb` Carlos Adamson
+- `NFI_data_load_and_merge.ipynb` Kristin Predeck
+- `NIST_data_inspect.ipynb` Kristin Predeck
